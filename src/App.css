@@ -1,3 +1,15 @@
+#root {
+  --gray-default: #4D5562;
+  --white-default: #F9FAFB;
+  --gray-light: #D2D5DA;
+  --gray-2: #394150;
+  --black-default: #040711;
+  --blue-default: #263FA9;
+  --blue-light: #7CA9F3;
+  --gray-3: #121826CC;
+  --gray-4: #212936CC;
+}
+
 body {
   margin: 0;
 }
@@ -15,4 +27,51 @@ main {
   top: 50px;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.translator {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 8px;
+  .translator__source,
+  .translator__target {
+    width: 400px;
+    height: 300px;
+    background-color: var(--gray-4);
+    border: 1px solid var(--gray-default);
+    border-radius: 20px;
+    padding: 24px;
+  }
+}
+
+.translator__source-language,
+.translator__target-language {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border-bottom: 1px solid var(--gray-default);
+}
+
+.translator__source-language-button,
+.translator__target-language-button {
+  background-color: transparent;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 12px;
+  color: var(--white-default);
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--gray-2);
+  }
+
+  &.active {
+    background-color: var(--gray-default);
+  }
 }
