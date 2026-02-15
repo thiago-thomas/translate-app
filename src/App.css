@@ -12,6 +12,7 @@
 
 body {
   margin: 0;
+  font-size: 10px;
 }
 
 main {
@@ -19,7 +20,8 @@ main {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center bottom;
-  height: 100vh;
+  height: calc(100vh - 100px);
+  padding-top: 100px;
 }
 
 .logo {
@@ -32,19 +34,35 @@ main {
 .translator {
   height: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   gap: 8px;
   .translator__source,
   .translator__target {
-    width: 400px;
+    width: 800px;
     height: 300px;
     background-color: var(--gray-4);
     border: 1px solid var(--gray-default);
     border-radius: 20px;
     padding: 24px;
   }
+}
+
+.translator__source-language-button,
+.translator__target-language-button,
+.translator__source-textarea,
+.translator__target-textarea {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+
+.translator__source,
+.translator__target {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .translator__source-language,
@@ -54,6 +72,7 @@ main {
   align-items: center;
   gap: 8px;
   padding: 8px;
+  padding-bottom: 16px;
   border-bottom: 1px solid var(--gray-default);
 }
 
@@ -73,5 +92,59 @@ main {
 
   &.active {
     background-color: var(--gray-default);
+  }
+}
+
+.translator__source-textarea,
+.translator__target-textarea {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border: none;
+  color: var(--white-default);
+  resize: none;
+  padding-top: 16px;
+  font-weight: bold;
+}
+
+.translator__source-options,
+.translator__target-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+}
+
+.translator__source-options-left,
+.translator__target-options-left {
+  display: flex;
+  gap: 8px;
+
+  button {
+    background-color: transparent;
+    border: 2px solid var(--gray-default);
+    border-radius: 12px;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+}
+
+.translator__source-options-translate{
+  button {
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: var(--blue-default);
+    border: 1px solid var(--gray-light);
+    border-radius: 12px;
+    padding: 14px 26px;
+    color: var(--white-default);
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 }

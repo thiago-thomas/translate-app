@@ -1,5 +1,8 @@
 import './App.css'
 import logo from './assets/logo.svg'
+import listenIcon from './assets/listen.svg'
+import copyIcon from './assets/copy.svg'
+import alfaIcon from './assets/alfa.svg'
 
 function App() {
   return (
@@ -17,11 +20,11 @@ function App() {
             <textarea className="translator__source-textarea" placeholder="Type or paste text here..."></textarea>
             <div className="translator__source-options">
               <div className="translator__source-options-left">
-                <button type="button">Listen</button>
-                <button type="button">Copy</button>
+                <button type="button"><img src={listenIcon} alt="Listen" /></button>
+                <button type="button"><img src={copyIcon} alt="Copy" /></button>
               </div>
               <div className="translator__source-options-translate">
-                <button type="button">Translate</button>
+                <button type="button"><img src={alfaIcon} alt="Translate" />Translate</button>
               </div>
             </div>
           </div>
@@ -34,11 +37,8 @@ function App() {
             <textarea className="translator__target-textarea" placeholder="Translation will appear here..." readOnly></textarea>
             <div className="translator__target-options">
               <div className="translator__target-options-left">
-                <button type="button">Listen</button>
-                <button type="button">Copy</button>
-              </div>
-              <div className="translator__target-options-translate">
-                <button type="button">Clear</button>
+                <button type="button"><img src={listenIcon} alt="Listen" /></button>
+                <button type="button"><img src={copyIcon} alt="Copy" /></button>
               </div>
             </div> 
           </div>
