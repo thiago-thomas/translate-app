@@ -13,6 +13,7 @@
 body {
   margin: 0;
   font-size: 10px;
+  font-family: Arial, Helvetica, sans-serif
 }
 
 main {
@@ -38,15 +39,6 @@ main {
   align-items: center;
   flex-direction: column;
   gap: 8px;
-  .translator__source,
-  .translator__target {
-    width: 800px;
-    height: 300px;
-    background-color: var(--gray-4);
-    border: 1px solid var(--gray-default);
-    border-radius: 20px;
-    padding: 24px;
-  }
 }
 
 .translator__source-language-button,
@@ -63,6 +55,18 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  width: 800px;
+  height: 300px;
+  background-color: var(--gray-4);
+  border: 1px solid var(--gray-default);
+  border-radius: 20px;
+  padding: 24px;
+}
+
+.translator__source-textarea,
+.translator__target-textarea {
+  outline: none;
 }
 
 .translator__source-language,

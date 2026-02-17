@@ -4,11 +4,36 @@ import listenIcon from "./assets/listen.svg";
 import copyIcon from "./assets/copy.svg";
 import alfaIcon from "./assets/alfa.svg";
 import leftRightIcon from "./assets/left_right_arrows.svg";
+import { useState } from "react";
+import { fetchTranslation } from "./services/api";
+import type { TranslationResponse } from "./types/api";
+import { Loading } from "./components/Loading";
 
 function App() {
+  const [translatingText, setTranslatingText] = useState("Hello World!");
+  const [translatedText, setTranslatedText] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function handleTranslate() {
+    if(translatingText) {
+      try {
+        setLoading(true);
+        const translatedData: TranslationResponse = await fetchTranslation(translatingText,"en-US","es-ES");
+        setTranslatedText(translatedData.matches[0].translation);
+      } catch (err) {
+        alert('An error occurred while fetching translation. Error: ' + err);
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      alert('Please enter text to translate.');
+    }
+  }
+
   return (
     <>
       <main>
+        {loading && <Loading text="Translating..." />}
         <img src={logo} alt="translate logo" className="logo" />
         <div className="translator">
           <div className="translator__source">
@@ -41,6 +66,9 @@ function App() {
             <textarea
               className="translator__source-textarea"
               placeholder="Type or paste text here..."
+              onChange={(e) => setTranslatingText(e.target.value)}
+              value={translatingText}
+              maxLength={500}
             ></textarea>
             <div className="translator__source-options">
               <div className="translator__source-options-left">
@@ -52,7 +80,7 @@ function App() {
                 </button>
               </div>
               <div className="translator__source-options-translate">
-                <button type="button">
+                <button type="button" onClick={handleTranslate}>
                   <img src={alfaIcon} alt="Translate" />
                   Translate
                 </button>
@@ -76,7 +104,7 @@ function App() {
                 </button>
                 <button
                   type="button"
-                  className="translator__target-language-button"
+                  className="translator__target-language-button active"
                 >
                   Spanish
                 </button>
@@ -90,6 +118,7 @@ function App() {
             <textarea
               className="translator__target-textarea"
               placeholder="Translation will appear here..."
+              value={translatedText}
               readOnly
             ></textarea>
             <div className="translator__target-options">
