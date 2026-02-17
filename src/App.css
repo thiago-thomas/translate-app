@@ -76,6 +76,10 @@ main {
   border-bottom: 1px solid var(--gray-default);
 }
 
+.translator__target-language {
+  justify-content: space-between;
+}
+
 .translator__source-language-button,
 .translator__target-language-button {
   background-color: transparent;
@@ -116,7 +120,8 @@ main {
 }
 
 .translator__source-options-left,
-.translator__target-options-left {
+.translator__target-options-left,
+.translator__target-language-right {
   display: flex;
   gap: 8px;
 
@@ -128,6 +133,11 @@ main {
     display: flex;
     align-items: center;
     cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+      background-color: var(--gray-3);
+    }
   }
 
 }
@@ -146,5 +156,10 @@ main {
     display: flex;
     align-items: center;
     gap: 8px;
+
+    &:hover,
+    &:focus-visible {
+      background-color: var(--blue-light);
+    }
   }
 }

@@ -1,51 +1,112 @@
-import './App.css'
-import logo from './assets/logo.svg'
-import listenIcon from './assets/listen.svg'
-import copyIcon from './assets/copy.svg'
-import alfaIcon from './assets/alfa.svg'
+import "./App.css";
+import logo from "./assets/logo.svg";
+import listenIcon from "./assets/listen.svg";
+import copyIcon from "./assets/copy.svg";
+import alfaIcon from "./assets/alfa.svg";
+import leftRightIcon from "./assets/left_right_arrows.svg";
 
 function App() {
   return (
     <>
-      <main >
+      <main>
         <img src={logo} alt="translate logo" className="logo" />
         <div className="translator">
           <div className="translator__source">
             <div className="translator__source-language">
-              <button type="button" className="translator__source-language-button">Detect Language</button>
-              <button type="button" className="translator__source-language-button active">English</button>
-              <button type="button" className="translator__source-language-button">French</button>
-              <button type="button" className="translator__source-language-button">Spanish</button>
+              <button
+                type="button"
+                className="translator__source-language-button"
+              >
+                Detect Language
+              </button>
+              <button
+                type="button"
+                className="translator__source-language-button active"
+              >
+                English
+              </button>
+              <button
+                type="button"
+                className="translator__source-language-button"
+              >
+                French
+              </button>
+              <button
+                type="button"
+                className="translator__source-language-button"
+              >
+                Spanish
+              </button>
             </div>
-            <textarea className="translator__source-textarea" placeholder="Type or paste text here..."></textarea>
+            <textarea
+              className="translator__source-textarea"
+              placeholder="Type or paste text here..."
+            ></textarea>
             <div className="translator__source-options">
               <div className="translator__source-options-left">
-                <button type="button"><img src={listenIcon} alt="Listen" /></button>
-                <button type="button"><img src={copyIcon} alt="Copy" /></button>
+                <button type="button">
+                  <img src={listenIcon} alt="Listen" />
+                </button>
+                <button type="button">
+                  <img src={copyIcon} alt="Copy" />
+                </button>
               </div>
               <div className="translator__source-options-translate">
-                <button type="button"><img src={alfaIcon} alt="Translate" />Translate</button>
+                <button type="button">
+                  <img src={alfaIcon} alt="Translate" />
+                  Translate
+                </button>
               </div>
             </div>
           </div>
           <div className="translator__target">
             <div className="translator__target-language">
-              <button type="button" className="translator__target-language-button">English</button>
-              <button type="button" className="translator__target-language-button">French</button>
-              <button type="button" className="translator__target-language-button">Spanish</button>
+              <div className="translator__target-language-left">
+                <button
+                  type="button"
+                  className="translator__target-language-button"
+                >
+                  English
+                </button>
+                <button
+                  type="button"
+                  className="translator__target-language-button"
+                >
+                  French
+                </button>
+                <button
+                  type="button"
+                  className="translator__target-language-button"
+                >
+                  Spanish
+                </button>
+              </div>
+              <div className="translator__target-language-right">
+                <button type="button">
+                  <img src={leftRightIcon} alt="Swap languages" />
+                </button>
+              </div>
             </div>
-            <textarea className="translator__target-textarea" placeholder="Translation will appear here..." readOnly></textarea>
+            <textarea
+              className="translator__target-textarea"
+              placeholder="Translation will appear here..."
+              readOnly
+            ></textarea>
             <div className="translator__target-options">
               <div className="translator__target-options-left">
-                <button type="button"><img src={listenIcon} alt="Listen" /></button>
-                <button type="button"><img src={copyIcon} alt="Copy" /></button>
+                <button type="button">
+                  <img src={listenIcon} alt="Listen" />
+                </button>
+                <button type="button">
+                  <img src={copyIcon} alt="Copy" />
+                </button>
               </div>
-            </div> 
+            </div>
           </div>
         </div>
       </main>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
