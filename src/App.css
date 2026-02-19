@@ -69,15 +69,25 @@ main {
   outline: none;
 }
 
+
+.translator__source-language,
+.translator__target-language,
+.translator__target-language-left {
+  display: flex;
+}
+
 .translator__source-language,
 .translator__target-language {
-  display: flex;
-  justify-content: flex-start;
   align-items: center;
-  gap: 8px;
   padding: 8px;
   padding-bottom: 16px;
   border-bottom: 1px solid var(--gray-default);
+}
+
+.translator__source-language,
+.translator__target-language-left {
+  justify-content: flex-start;
+  gap: 8px;
 }
 
 .translator__target-language {

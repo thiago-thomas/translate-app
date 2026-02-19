@@ -11,14 +11,16 @@ import { Loading } from "./components/Loading";
 
 function App() {
   const [translatingText, setTranslatingText] = useState("Hello World!");
+  const [translatingLanguage, setTranslatingLanguage] = useState("en-US");
   const [translatedText, setTranslatedText] = useState("");
+  const [translatedLanguage, setTranslatedLanguage] = useState("es-ES");
   const [loading, setLoading] = useState(false);
 
   async function handleTranslate() {
     if(translatingText) {
       try {
         setLoading(true);
-        const translatedData: TranslationResponse = await fetchTranslation(translatingText,"en-US","es-ES");
+        const translatedData: TranslationResponse = await fetchTranslation(translatingText, translatingLanguage, translatedLanguage);
         setTranslatedText(translatedData.matches[0].translation);
       } catch (err) {
         alert('An error occurred while fetching translation. Error: ' + err);
@@ -40,25 +42,29 @@ function App() {
             <div className="translator__source-language">
               <button
                 type="button"
-                className="translator__source-language-button"
+                className={`translator__source-language-button ${translatingLanguage === 'autodetect' ? 'active' : ''}`}
+                onClick={() => setTranslatingLanguage("autodetect")}
               >
                 Detect Language
               </button>
               <button
                 type="button"
-                className="translator__source-language-button active"
+                className={`translator__source-language-button ${translatingLanguage === 'en-US' ? 'active' : ''}`}
+                onClick={() => setTranslatingLanguage("en-US")}
               >
                 English
               </button>
               <button
                 type="button"
-                className="translator__source-language-button"
+                className={`translator__source-language-button ${translatingLanguage === 'fr-FR' ? 'active' : ''}`}
+                onClick={() => setTranslatingLanguage("fr-FR")}
               >
                 French
               </button>
               <button
                 type="button"
-                className="translator__source-language-button"
+                className={`translator__source-language-button ${translatingLanguage === 'es-ES' ? 'active' : ''}`}
+                onClick={() => setTranslatingLanguage("es-ES")}
               >
                 Spanish
               </button>
@@ -92,19 +98,22 @@ function App() {
               <div className="translator__target-language-left">
                 <button
                   type="button"
-                  className="translator__target-language-button"
+                  className={`translator__target-language-button ${translatedLanguage === 'en-US' ? 'active' : ''}`}
+                  onClick={() => setTranslatedLanguage("en-US")}
                 >
                   English
                 </button>
                 <button
                   type="button"
-                  className="translator__target-language-button"
+                  className={`translator__target-language-button ${translatedLanguage === 'fr-FR' ? 'active' : ''}`}
+                  onClick={() => setTranslatedLanguage("fr-FR")}
                 >
                   French
                 </button>
                 <button
                   type="button"
-                  className="translator__target-language-button active"
+                  className={`translator__target-language-button ${translatedLanguage === 'es-ES' ? 'active' : ''}`}
+                  onClick={() => setTranslatedLanguage("es-ES")}
                 >
                   Spanish
                 </button>
