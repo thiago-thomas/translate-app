@@ -17,6 +17,40 @@ function App() {
   const [translatedLanguage, setTranslatedLanguage] = useState("es-ES");
   const [loading, setLoading] = useState(false);
 
+  function translatingTextToSpeech() {
+    const utterance = new SpeechSynthesisUtterance(translatingText);
+
+    // Definir o idioma desejado
+    utterance.lang = translatingLanguage;
+
+    const voices = speechSynthesis.getVoices();
+    console.log("Available voices:", voices);
+
+    // Encontrar a primeira voz natural que corresponde ao idioma
+    const naturalVoice = voices.find(
+      (voice) => voice.lang === utterance.lang && voice.name.includes("Google"),
+    );
+
+    const filterGoogleVoices = voices.filter((voice) =>
+      voice.name.includes("Google"),
+    );
+    console.log("Google voices:", filterGoogleVoices);
+
+    if (naturalVoice) {
+      utterance.voice = naturalVoice;
+    } else {
+      // Se não encontrar voz "Natural", pega a primeira voz do idioma
+      const firstVoiceOfLang = voices.find(
+        (voice) => voice.lang === utterance.lang,
+      );
+      if (firstVoiceOfLang) {
+        utterance.voice = firstVoiceOfLang;
+      }
+    }
+
+    speechSynthesis.speak(utterance);
+  }
+
   async function handleTranslate() {
     if (translatingText) {
       try {
@@ -52,11 +86,11 @@ function App() {
   };
 
   function swapTranslations() {
-    if(translatingLanguage !== "autodetect"){
-      setTranslatedLanguage(translatingLanguage)
-      setTranslatedText(translatingText)
-      setTranslatingLanguage(translatedLanguage)
-      setTranslatingText(translatedText)
+    if (translatingLanguage !== "autodetect") {
+      setTranslatedLanguage(translatingLanguage);
+      setTranslatedText(translatingText);
+      setTranslatingLanguage(translatedLanguage);
+      setTranslatingText(translatedText);
     }
   }
 
@@ -106,7 +140,10 @@ function App() {
             ></textarea>
             <div className="translator__source-options">
               <div className="translator__source-options-left">
-                <button type="button">
+                <button
+                  type="button"
+                  onClick={translatingTextToSpeech}
+                >
                   <img src={listenIcon} alt="Listen" />
                 </button>
                 <button
@@ -118,7 +155,11 @@ function App() {
                 </button>
               </div>
               <div className="translator__source-options-translate">
-                <button type="button" onClick={handleTranslate} disabled={!translatingText}>
+                <button
+                  type="button"
+                  onClick={handleTranslate}
+                  disabled={!translatingText}
+                >
                   <img src={alfaIcon} alt="Translate" />
                   Translate
                 </button>
@@ -152,7 +193,11 @@ function App() {
               </div>
               <div className="translator__target-language-right">
                 <button type="button">
-                  <img src={leftRightIcon} onClick={swapTranslations} alt="Swap languages" />
+                  <img
+                    src={leftRightIcon}
+                    onClick={swapTranslations}
+                    alt="Swap languages"
+                  />
                 </button>
               </div>
             </div>
