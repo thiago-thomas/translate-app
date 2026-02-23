@@ -178,6 +178,11 @@ function App() {
               value={translatingText}
               maxLength={500}
             ></textarea>
+            <div className="translator__character-count">
+              <span>
+                {translatingText.length}/500
+              </span>
+            </div>
             <div className="translator__source-options">
               <div className="translator__source-options-left">
                 <button

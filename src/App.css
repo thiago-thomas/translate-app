@@ -165,6 +165,15 @@ main {
 
 }
 
+.translator__character-count {
+  font-size: 0.875rem;
+  color: var(--gray-light);
+  margin-top: 4px;
+
+  display: flex;
+  justify-content: flex-end;
+}
+
 .translator__source-options-translate{
   button {
     font-size: 1rem;
