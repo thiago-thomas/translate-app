@@ -123,12 +123,15 @@ function App() {
   };
 
   function swapTranslations() {
-    if (translatingLanguage !== "autodetect") {
-      setTranslatedLanguage(translatingLanguage);
-      setTranslatedText(translatingText);
-      setTranslatingLanguage(translatedLanguage);
-      setTranslatingText(translatedText);
+    if(translatingLanguage === "autodetect") {
+      return;
     }
+
+    setTranslatedLanguage(translatingLanguage);
+    setTranslatedText(translatingText);
+    setTranslatingLanguage(translatedLanguage);
+    setTranslatingText(translatedText);
+
   }
 
   return (
@@ -233,10 +236,9 @@ function App() {
                 </button>
               </div>
               <div className="translator__target-language-right">
-                <button type="button">
+                <button type="button" disabled={translatingLanguage === "autodetect"} onClick={swapTranslations}>
                   <img
                     src={leftRightIcon}
-                    onClick={swapTranslations}
                     alt="Swap languages"
                   />
                 </button>
