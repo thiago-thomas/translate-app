@@ -17,38 +17,75 @@ function App() {
   const [translatedLanguage, setTranslatedLanguage] = useState("es-ES");
   const [loading, setLoading] = useState(false);
 
-  function translatingTextToSpeech() {
-    const utterance = new SpeechSynthesisUtterance(translatingText);
-
-    // Definir o idioma desejado
-    utterance.lang = translatingLanguage;
-
-    const voices = speechSynthesis.getVoices();
-    console.log("Available voices:", voices);
-
-    // Encontrar a primeira voz natural que corresponde ao idioma
-    const naturalVoice = voices.find(
-      (voice) => voice.lang === utterance.lang && voice.name.includes("Google"),
-    );
-
-    const filterGoogleVoices = voices.filter((voice) =>
-      voice.name.includes("Google"),
-    );
-    console.log("Google voices:", filterGoogleVoices);
-
-    if (naturalVoice) {
-      utterance.voice = naturalVoice;
-    } else {
-      // Se não encontrar voz "Natural", pega a primeira voz do idioma
-      const firstVoiceOfLang = voices.find(
-        (voice) => voice.lang === utterance.lang,
-      );
-      if (firstVoiceOfLang) {
-        utterance.voice = firstVoiceOfLang;
-      }
+  function translatingTextToSpeech(isTranslating: boolean) {
+    if (isTranslating && translatingLanguage === "autodetect") {
+      return;
     }
 
-    speechSynthesis.speak(utterance);
+    if (isTranslating) {
+      if (!translatingText) {
+        return;
+      }
+      const utterance = new SpeechSynthesisUtterance(translatingText);
+      utterance.lang = translatingLanguage;
+      const voices = speechSynthesis.getVoices();
+
+      const naturalVoice = voices.find(
+        (voice) =>
+          voice.lang === utterance.lang && voice.name.includes("Natural"),
+      );
+      const googleVoice = voices.find(
+        (voice) =>
+          voice.lang === utterance.lang && voice.name.includes("Google"),
+      );
+
+      if (naturalVoice) {
+        utterance.voice = naturalVoice;
+      } else if (googleVoice) {
+        utterance.voice = googleVoice;
+      } else {
+        const firstVoiceOfLang = voices.find(
+          (voice) => voice.lang === utterance.lang,
+        );
+        if (firstVoiceOfLang) {
+          utterance.voice = firstVoiceOfLang;
+        }
+      }
+
+      speechSynthesis.speak(utterance);
+    } else {
+      if (!translatedText) {
+        return;
+      }
+
+      const utterance = new SpeechSynthesisUtterance(translatedText);
+      utterance.lang = translatedLanguage;
+      const voices = speechSynthesis.getVoices();
+
+      const naturalVoice = voices.find(
+        (voice) =>
+          voice.lang === utterance.lang && voice.name.includes("Natural"),
+      );
+      const googleVoice = voices.find(
+        (voice) =>
+          voice.lang === utterance.lang && voice.name.includes("Google"),
+      );
+
+      if (naturalVoice) {
+        utterance.voice = naturalVoice;
+      } else if (googleVoice) {
+        utterance.voice = googleVoice;
+      } else {
+        const firstVoiceOfLang = voices.find(
+          (voice) => voice.lang === utterance.lang,
+        );
+        if (firstVoiceOfLang) {
+          utterance.voice = firstVoiceOfLang;
+        }
+      }
+
+      speechSynthesis.speak(utterance);
+    }
   }
 
   async function handleTranslate() {
@@ -142,7 +179,11 @@ function App() {
               <div className="translator__source-options-left">
                 <button
                   type="button"
-                  onClick={translatingTextToSpeech}
+                  onClick={() => translatingTextToSpeech(true)}
+                  disabled={
+                    translatingLanguage === "autodetect" || !translatingText
+                  }
+                  title="For the best experience with this function, use Microsoft Edge or Google Chrome."
                 >
                   <img src={listenIcon} alt="Listen" />
                 </button>
@@ -209,7 +250,12 @@ function App() {
             ></textarea>
             <div className="translator__target-options">
               <div className="translator__target-options-left">
-                <button type="button">
+                <button
+                  type="button"
+                  onClick={() => translatingTextToSpeech(false)}
+                  disabled={!translatedText}
+                  title="For the best experience with this function, use Microsoft Edge or Google Chrome."
+                >
                   <img src={listenIcon} alt="Listen" />
                 </button>
                 <button
