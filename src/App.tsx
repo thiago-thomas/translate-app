@@ -138,7 +138,9 @@ function App() {
     <>
       <main>
         {loading && <Loading text="Translating..." />}
-        <img src={logo} alt="translate logo" className="logo" />
+        <div className="logo-container">
+          <img src={logo} alt="translate logo" className="logo" />
+        </div>
         <div className="translator">
           <div className="translator__source">
             <div className="translator__source-language">
