@@ -34,6 +34,8 @@
 
 ## Overview
 
+This is a simple web application for translating text between multiple languages, with support for voice playback, copying to clipboard, and a responsive interface. It was developed with React, TypeScript, and Vite, using the MyMemory API for translations, the Web Speech API for speech synthesis, and React Toastify for notifications.
+
 ![screenshot](./design/Desktop_1350px.jpg)
 
 <!--
